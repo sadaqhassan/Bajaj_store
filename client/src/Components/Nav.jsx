@@ -32,8 +32,11 @@ const Nav = () => {
       <div className='flex justify-between px-4 md:hidden py-4 text-white bg-gray-700'>
         <p>Bajaj_Store</p>
         <div className='flex space-x-4'>
+          {
+            !currentUser || currentUser == null &&
             <button className='bg-cyan-500 px-2 py-1 rounded'>Login</button>
-            <button onClick={()=>setMenuOpen(!menuOpen)}> <MenuIcon/></button>
+        }
+          <button onClick={()=>setMenuOpen(!menuOpen)}> <MenuIcon/></button>
         </div>
       </div>
       <hr />
