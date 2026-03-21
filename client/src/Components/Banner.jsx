@@ -1,5 +1,5 @@
 import React from 'react'
-
+import { ArrowBigRight } from 'lucide-react'
 const Banner = () => {
 return (
     <div className='flex flex-col justify-center items-center mt-30 mb-10 mx-40'>
@@ -12,6 +12,10 @@ return (
         Hadda booqo oo hel mooto <br/> taasi oo kuu fududaynaysa noloshaada!</p>
         </div>
     </div>
+    <button className='flex gap-4 bg-cyan-600 px-2 py-1 rounded text-white'>
+        <ArrowBigRight/>
+        Get started
+    </button>
     </div>
 )
 }
