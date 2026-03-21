@@ -12,7 +12,7 @@ return (
         Hadda booqo oo hel mooto <br/> taasi oo kuu fududaynaysa noloshaada!</p>
         </div>
     </div>
-    <button className='flex gap-4 bg-cyan-600 px-2 py-1 rounded text-white'>
+    <button  className='flex gap-4 bg-cyan-600 px-2 py-1 rounded text-white'>
         <ArrowBigRight/>
         Get started
     </button>
