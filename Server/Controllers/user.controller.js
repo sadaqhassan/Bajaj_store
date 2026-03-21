@@ -28,13 +28,12 @@ export const registerApi = async(req,res,next)=>{
 
         return res.status(200).json({success:true,message:"Welcome mr "+username})
     } catch (error) {
-        next(errorHandle(
-            500,"server error"
-        ))
+        res.status(500).json({success:false,message:"server error"})
+        console.log(error)
     }
 };
 
-export const loginApi = async(req,res,next)=>{
+export const loginApi = async(req,res)=>{
     const {email ,password} = req.body
 
     if(!email || !password){
@@ -52,13 +51,11 @@ export const loginApi = async(req,res,next)=>{
             return res.status(400).json({success:false,message:"incorrect email or password"})
         }
 
-        const token = jwt.sign({id:user._id},process.env.JWR_SECRET, {expiresIn:"7d"})
+        const token = jwt.sign({id:user._id},process.env.JWT_SECRET, {expiresIn:"7d"})
 
-
-        return res.cookie("accessToken",token,{httpOnly:true}).status(200).json({success:true,message:"Welcome mr "+username})
+        return res.cookie("accessToken",token,{httpOnly:true}).status(200).json({success:true,message:`Welcome back `})
     } catch (error) {
-        next(errorHandle(
-            500,"server error"
-        ))
+        res.status(500).json({success:false,message:"server error"})
+        console.log(error)
     }
 }
