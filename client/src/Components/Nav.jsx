@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { MenuIcon } from 'lucide-react'
 
 const Nav = () => {
+  const navigate = useNavigate()
   const [currentUser,setCurrentUser] = useState(null)
   const [menuOpen , setMenuOpen] = useState(false) 
   return (
@@ -16,7 +17,7 @@ const Nav = () => {
           <Link to={'/'}> My Lists </Link>
         </div>
         {
-          currentUser  || currentUser != null ?
+          currentUser  || currentUser !== null ?
           <div className='relative group'>
           <img src="./user.png" alt="" className='w-10 h-10 rounded-full'/>
           <ul className='hidden z-10 text-gray-900 px-4 rounded py-2 fixed  right-8  top-14 w-30 group-hover:block bg-white shadow-xl '>
@@ -24,7 +25,7 @@ const Nav = () => {
             <li className='cursor-pointer '>Profile</li>
           </ul>
         </div> :
-        <button className='bg-cyan-500 px-2 py-1 rounded'>Login</button>        
+        <button onClick={()=>navigate('/auth')} className='bg-cyan-500 px-2 py-1 rounded'>Login</button>        
         }
       </div>
 
@@ -33,9 +34,9 @@ const Nav = () => {
         <p>Bajaj_Store</p>
         <div className='flex space-x-4'>
           {
-            !currentUser || currentUser == null &&
-            <button className='bg-cyan-500 px-2 py-1 rounded'>Login</button>
-        }
+            !currentUser &&
+            <button onClick={()=>navigate('/auth')} className='bg-cyan-500 px-2 py-1 rounded md:hidden'>Login</button>
+          }
           <button onClick={()=>setMenuOpen(!menuOpen)}> <MenuIcon/></button>
         </div>
       </div>
