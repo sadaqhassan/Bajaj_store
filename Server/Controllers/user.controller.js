@@ -1,6 +1,5 @@
 // Register
 
-import { errorHandle } from "../MiddleWares/error.js"
 import { theUser } from "../Model/user.model.js"
 import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
@@ -13,6 +12,7 @@ export const registerApi = async(req,res,next)=>{
     }
     try {
         const user = await theUser.findOne({email})
+
         if(user){
             return res.status(400).json({success:false,message:"this user is exist"})
         }
