@@ -59,3 +59,23 @@ export const loginApi = async(req,res)=>{
         console.log(error)
     }
 }
+
+//profileGet
+export const getProfileApi = async (req,res) => {
+    const {userId} = req
+
+    if(!userId) return res.status(404).json({success:false,message:"sorry not get info"});
+    try {
+        const user = await theUser.findById(userId);
+        if(!user){
+            return res.status(404).json({success:false,message:"user not found"});
+        }
+
+        const {password:pass, ...rest} = user._doc
+
+        return res.status(200).json({success:true,userData:rest});
+    } catch (error) {
+        res.status(500).json({success:false,message:"server error"})
+        console.log(error)
+    }
+}
