@@ -13,6 +13,6 @@ const userModel = mongoose.Schema({
         type:String,
         required:true
     },
-},{timeStamp:true})
+},{timestamps:true})
 
 export const theUser = mongoose.model("user",userModel);
