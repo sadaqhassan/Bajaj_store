@@ -8,7 +8,34 @@ const Login = () => {
     const handleSubmit = async(e)=>{
         e.preventDefault();
         
-        //sendRegisterRequest
+        //sendRequest
+        if(state === "register"){
+            const res = await fetch('http://localhost:4000/api/user/register',{
+            method:"POST",
+            headers:{"Content-Type": "application/json"},
+            body:JSON.stringify(inputData)
+        })
+        const data = await res.json();
+        if(!data.success){
+            return toast.error(data.message)
+        }
+
+        toast.success(data.message)
+    }else{
+        const res = await fetch('http://localhost:4000/api/user/login',{
+            method:"POST",
+            headers:{"Content-Type": "application/json"},
+            credentials:"include",
+            body:JSON.stringify(inputData)
+        })
+        const data = await res.json();
+        if(!data.success){
+            return toast.error(data.message)
+        }
+
+        toast.success(data.message)
+    }
+    }
         
 
     const handleChange = (e)=>{
