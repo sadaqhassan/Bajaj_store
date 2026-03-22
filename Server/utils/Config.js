@@ -9,5 +9,7 @@ export const configApp = (app)=>{
     app.listen(PORT,()=>console.log("server is running on http://localhost:"+PORT))
     app.use(express.json());
     app.use(cookieParser());
-    app.use(cors())
+    app.use(cors({
+        credentials:true
+    }))
 }  
