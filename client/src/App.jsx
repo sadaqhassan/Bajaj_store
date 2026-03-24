@@ -4,6 +4,7 @@ import Home from './Pages/Home'
 import Nav from './Components/Nav'
 import Login from './Pages/Login'
 import { ToastContainer} from 'react-toastify';
+import Profile from './Pages/Profile'
 
 
 const App = () => {
@@ -14,6 +15,7 @@ const App = () => {
       <Routes>
         <Route path='/' element={<Home/>}/>
         <Route path='/auth' element={<Login/>}/>
+        <Route path='/profile' element={<Profile/>}/>
       </Routes>
     </div>
   )
