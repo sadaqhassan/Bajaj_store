@@ -1,7 +1,7 @@
-import { useState } from "react";
-import { useEffect } from "react";
-import { useContext } from "react";
-import { createContext } from "react";
+import { useEffect } from "react"
+import { createContext } from "react"
+import { useContext } from "react"
+import { useState } from "react"
 
 export const AppContext = createContext()
 
@@ -10,7 +10,7 @@ export const ContextProvider = ({children})=>{
 
     const [currentUser,setCurrentUser] = useState(()=>{
         let userGet = localStorage.getItem("user")
-        return userGet ? JSON.parse(currentUser) : null
+        return userGet ? JSON.parse(userGet) : null
     })
 
     //useEfects
@@ -29,9 +29,9 @@ export const ContextProvider = ({children})=>{
         setCurrentUser
     }
 
-    return <AppContext value={value}>
+    return <AppContext.Provider value={value}>
         {children}
-    </AppContext>
+    </AppContext.Provider>
 }
 
-export const useApp = ()=>useContext(AppContext);
+export const useApp = ()=> useContext(AppContext);
