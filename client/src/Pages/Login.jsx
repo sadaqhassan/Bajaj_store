@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { useApp } from '../Context/AppContext';
 
 const Login = () => {
     const navigate = useNavigate()
+    const {currentUser,setCurrentUser} = useApp()
     const [state,setState] = useState("login");
     const [loading,setLoading] = useState(false);
     const [inputData,setInputData] = useState({});
@@ -27,6 +29,9 @@ const Login = () => {
         }
 
         toast.success(data.message)
+        setCurrentUser(
+            data.userData
+        )
         navigate("/profile")
     }else{
         const res = await fetch('http://localhost:4000/api/user/register',{
