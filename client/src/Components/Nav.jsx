@@ -1,11 +1,26 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { MenuIcon } from 'lucide-react'
+import { useApp } from '../Context/AppContext'
+import { toast } from 'react-toastify'
 
 const Nav = () => {
   const navigate = useNavigate()
-  const [currentUser,setCurrentUser] = useState(null)
-  const [menuOpen , setMenuOpen] = useState(false) 
+  const {currentUser,setCurrentUser} = useApp()
+  const [menuOpen , setMenuOpen] = useState(false)
+  
+  const LogoutFucntion = async () => {
+    const res = await fetch("http://localhost:4000/api/user/logout",{
+      method:"GET",
+      credentials:"include"
+    });
+    const data = await res.json();
+    if(!data.success){
+      toast.error(data.message)
+    }
+    toast.success(data.message)
+    setCurrentUser(null)
+  } 
   return (
     <div>
       {/* ...Desktop... */}
@@ -21,7 +36,7 @@ const Nav = () => {
           <div className='relative group'>
           <img src="./user.png" alt="" className='w-10 h-10 rounded-full'/>
           <ul className='hidden z-10 text-gray-900 px-4 rounded py-2 fixed  right-8  top-14 w-30 group-hover:block bg-white shadow-xl '>
-            <li className='cursor-pointer pb-3'>Logout</li>
+            <li onClick={LogoutFucntion} className='cursor-pointer pb-3'>Logout</li>
             <li className='cursor-pointer '>Profile</li>
           </ul>
         </div> :
