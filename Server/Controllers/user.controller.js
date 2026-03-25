@@ -52,8 +52,9 @@ export const loginApi = async(req,res)=>{
         }
 
         const token = jwt.sign({id:user._id},process.env.JWT_SECRET, {expiresIn:"7d"})
+        const {password:pass, ...rest} = user._doc
 
-        return res.cookie("accessToken",token,{httpOnly:true}).status(200).json({success:true,message:`Welcome back `})
+        return res.cookie("accessToken",token,{httpOnly:true}).status(200).json({success:true,userData:rest ,message:`Welcome back `})
     } catch (error) {
         res.status(500).json({success:false,message:"server error"})
         console.log(error)
@@ -79,3 +80,15 @@ export const getProfileApi = async (req,res) => {
         console.log(error)
     }
 }
+
+//logout
+
+export const logout = (req,res)=>{
+    try {
+        res.clearCookie("accessToken").json({success:true,message:"logedOut"})
+        localStorage.removeItem("user")
+    } catch (error) {
+        res.status(500).json({success:false,message:"server error"})
+        console.log(error)
+    }
+} 
