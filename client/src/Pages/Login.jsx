@@ -39,7 +39,7 @@ const Login = () => {
         if(!data.success){
             return toast.error(data.message)
         }
-
+        setState("login")
         toast.success(data.message)
     }
     }
