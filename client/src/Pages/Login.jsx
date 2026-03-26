@@ -1,11 +1,12 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { useApp } from '../Context/AppContext';
+import { useDispatch} from 'react-redux';
+import { userData } from '../Store/userSlice'; 
 
 const Login = () => {
     const navigate = useNavigate()
-    const {currentUser,setCurrentUser} = useApp()
+    const dispatch = useDispatch()
     const [state,setState] = useState("login");
     const [loading,setLoading] = useState(false);
     const [inputData,setInputData] = useState({});
@@ -27,12 +28,10 @@ const Login = () => {
         if(!data.success){
             return toast.error(data.message)
         }
-
+        dispatch(userData(data))
         toast.success(data.message)
-        setCurrentUser(
-            data.userData
-        )
         navigate("/profile")
+        console.log("user : "+currentUser)
     }else{
         const res = await fetch('http://localhost:4000/api/user/register',{
             method:"POST",
