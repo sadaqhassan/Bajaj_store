@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { useDispatch} from 'react-redux';
 import { userLogin } from '../Store/userSlice'; 
+import GoogleOAuth from '../Components/GoogleOAuth';
 
 const Login = () => {
     const navigate = useNavigate()
@@ -89,6 +90,7 @@ return (
                 }
                 </button>
             </div>
+            <GoogleOAuth/>
         </form>
 
     </div> 
