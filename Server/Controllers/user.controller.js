@@ -92,3 +92,40 @@ export const logout = (req,res)=>{
         console.log(error)
     }
 } 
+
+
+//loginOUTHGOOGLE
+
+const googleOuth = async (req,res) => {
+    const {email,username,avatar} = req.body
+    try {
+        const user = await theUser.findOne({email})
+
+        if(user){
+            return res.status(400).json({success:false,message:"this user is exist"})
+        }
+
+        const password = "FJAOPEQCCQFQ£"
+
+        const hash = await bcrypt.hash(password,10)
+
+        const newUser = new theUser({
+            username,
+            email,
+            password:hash,
+            avatar
+        });
+
+        await newUser.save();
+
+        const token = jwt.sign({id:user._id},process.env.JWT_SECRET, {expiresIn:"7d"})
+        const {password:pass, ...rest} = user._doc
+
+        return res.cookie("accessToken",token,{httpOnly:true}).status(200).json({success:true,userData:rest ,message:`Welcome back `})
+
+        
+    } catch (error) {
+        res.status(500).json({success:false,message:"server error"})
+        console.log(error)
+    }
+}
