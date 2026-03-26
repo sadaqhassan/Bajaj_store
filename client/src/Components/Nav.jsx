@@ -2,9 +2,11 @@ import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { MenuIcon } from 'lucide-react'
 import { toast } from 'react-toastify'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { userLogout } from '../Store/userSlice'
 
 const Nav = () => {
+  const dispatch = useDispatch()
   const navigate = useNavigate()
   const currentUser = useSelector((state)=>state.user.currentUser)
   const [menuOpen , setMenuOpen] = useState(false)
@@ -18,6 +20,8 @@ const Nav = () => {
     if(!data.success){
       toast.error(data.message)
     }
+    
+    dispatch(userLogout())
     toast.success(data.message)
   } 
 
