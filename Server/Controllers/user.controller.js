@@ -96,14 +96,10 @@ export const logout = (req,res)=>{
 
 //loginOUTHGOOGLE
 
-const googleOuth = async (req,res) => {
+export const googleOauth = async (req,res) => {
     const {email,username,avatar} = req.body
     try {
         const user = await theUser.findOne({email})
-
-        if(user){
-            return res.status(400).json({success:false,message:"this user is exist"})
-        }
 
         const password = "FJAOPEQCCQFQ£"
 
@@ -118,10 +114,11 @@ const googleOuth = async (req,res) => {
 
         await newUser.save();
 
-        const token = jwt.sign({id:user._id},process.env.JWT_SECRET, {expiresIn:"7d"})
+        const token = jwt.sign({id:newUser._id},process.env.JWT_SECRET, {expiresIn:"7d"})
+        
         const {password:pass, ...rest} = user._doc
 
-        return res.cookie("accessToken",token,{httpOnly:true}).status(200).json({success:true,userData:rest ,message:`Welcome back `})
+        return res.cookie("accessToken",token,{httpOnly:true}).status(200).json({success:true,userData:rest,message:`Welcome back`})
 
         
     } catch (error) {

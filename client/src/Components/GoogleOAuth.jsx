@@ -3,11 +3,15 @@ import { app } from '../Utils/firebase'
 import { GoogleAuthProvider, signInWithPopup ,getAuth} from 'firebase/auth'
 import { toast } from 'react-toastify'
 import { useDispatch } from 'react-redux'
-import { userLogin } from '../Store/userSlice'
+import { userLogin } from '../Store/userSlice';
+import { useNavigate } from 'react-router-dom'
+
 const GoogleOAuth = () => {
+const dispatch = useDispatch()
+const navigate = useNavigate()
 
 const loginWithGoogle = async()=>{
-    const dispatch = useDispatch
+
     try {
         const auth = getAuth(app)
         const provider =  new GoogleAuthProvider()
@@ -15,13 +19,13 @@ const loginWithGoogle = async()=>{
 
         const res = await fetch('http://localhost:4000/api/user/google',{
             method:"POST",
-            headers:{"Content-Type":"aplicattion/json"},
+            headers:{"Content-Type":"application/json"},
+            credentials:"include",
             body:JSON.stringify({
-                username:result.user.reloadUserInfo.displayName,
-                email:result.reloadUserInfo.user.email,
-                avatar:result.user.reloadUserInfo.photoUrl
+                username:result.user.displayName,
+                email:result.user.email,
+                avatar:result.user.photoURL
             }),
-            credentials:"include"
         });
         const data = await res.json();
 
@@ -30,20 +34,18 @@ const loginWithGoogle = async()=>{
         }
         dispatch(userLogin(data))
         toast.success(data.message)
-
-        console.log(result.user.reloadUserInfo)
+        navigate('/')
     } catch (error) {
-        console.log(error)
+        console.log(error.message)
     }
 
 }
-
-  return (
-    <button onClick={loginWithGoogle} type='button' className='bg-white shadow px-2 py-1 rounded flex justify-center gap-2 items-center'>
+return (
+    <div className='bg-white shadow px-2 py-1 rounded flex justify-center gap-2 items-center'>
         <img className='w-4 h-4' src="./google.png" alt="" />
-        <p className=''>Continue to Google</p>
-    </button>
-  )
+        <button onClick={loginWithGoogle} type='button'  className=''>Continue to Google</button>
+    </div>
+)
 }
 
 export default GoogleOAuth
