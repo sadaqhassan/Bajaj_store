@@ -5,6 +5,7 @@ import Nav from './Components/Nav'
 import Login from './Pages/Login'
 import { ToastContainer} from 'react-toastify';
 import Profile from './Pages/Profile'
+import ProtectPage from './Pages/ProtectPage'
 
 
 const App = () => {
@@ -15,7 +16,9 @@ const App = () => {
       <Routes>
         <Route path='/' element={<Home/>}/>
         <Route path='/auth' element={<Login/>}/>
-        <Route path='/profile' element={<Profile/>}/>
+        <Route path='/profile' element={<ProtectPage/>}>
+        <Route index element={<Profile/>}/>
+        </Route>
       </Routes>
     </div>
   )
