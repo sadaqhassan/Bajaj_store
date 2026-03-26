@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { useDispatch} from 'react-redux';
-import { userData } from '../Store/userSlice'; 
+import { userLogin } from '../Store/userSlice'; 
 
 const Login = () => {
     const navigate = useNavigate()
@@ -28,7 +28,7 @@ const Login = () => {
         if(!data.success){
             return toast.error(data.message)
         }
-        dispatch(userData(data))
+        dispatch(userLogin(data))
         toast.success(data.message)
         navigate("/profile")
         console.log("user : "+currentUser)
