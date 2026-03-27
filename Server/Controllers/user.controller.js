@@ -103,19 +103,18 @@ export const googleOauth = async (req,res) => {
 
         const password = "FJAOPEQCCQFQ£"
 
-    if(!user){
-        const hash = await bcrypt.hash(password,10)
+    const hash = await bcrypt.hash(password,10)
 
-        const newUser = new theUser({
+    const newUser = new theUser({
             username,
             email,
             password:hash,
             avatar
         });
 
+    if(!user){
         await newUser.save();
-
-        }
+    }
 
         const token = jwt.sign({id:newUser._id},process.env.JWT_SECRET, {expiresIn:"7d"})
         
