@@ -26,8 +26,9 @@ const Nav = () => {
   } 
 
   return (
+
     <div>
-      {/* ...Desktop... */}
+      
       <div className='md:flex text-white hidden justify-between px-10 py-4 bg-gray-700'>
         <p>Bajaj_Store</p>
         <div className='flex items-center gap-4'>
@@ -38,7 +39,7 @@ const Nav = () => {
         {
           currentUser  || currentUser !== null ?
           <div className='relative group'>
-          <img src="./user.png" alt="" className='w-10 h-10 rounded-full'/>
+          <img src={currentUser.avatar? currentUser.avatar : "./user.png"} alt="" className='w-10 h-10 rounded-full'/>
           <ul className='hidden z-10 text-gray-900 px-4 rounded py-2 fixed  right-8  top-14 w-30 group-hover:block bg-white shadow-xl '>
             <li onClick={LogoutFucntion} className='cursor-pointer pb-3'>Logout</li>
             <li onClick={()=>navigate('/profile')} className='cursor-pointer '>Profile</li>
