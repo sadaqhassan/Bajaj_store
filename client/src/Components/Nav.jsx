@@ -52,10 +52,12 @@ const Nav = () => {
       {/* ...mobile... */}
       <div className='flex justify-between px-4 md:hidden py-4 text-white bg-gray-700'>
         <p>Bajaj_Store</p>
-        <div className='flex space-x-4'>
+        <div className='flex space-x-4 items-center'>
           {
-            !currentUser &&
+            !currentUser || currentUser == null?
             <button onClick={()=>navigate('/auth')} className='bg-cyan-500 px-2 py-1 rounded md:hidden'>Login</button>
+            :
+            <img onClick={()=>navigate('/profile')} src={currentUser.avatar? currentUser.avatar : "./user.png"} alt="" className='w-7 h-7 rounded-full'/>
           }
           <button onClick={()=>setMenuOpen(!menuOpen)}> <MenuIcon/></button>
         </div>
@@ -67,6 +69,10 @@ const Nav = () => {
           <Link to={'/'}> Home </Link>
           <Link to={'/'}> Bajajs </Link>
           <Link to={'/'}> My Lists </Link>
+          {
+            currentUser  &&
+            <button onClick={LogoutFucntion} className='cursor-pointer pb-3'>Logout</button>
+          }
         </div>
         }
     </div>
