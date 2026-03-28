@@ -18,12 +18,17 @@ export const userSlice = createSlice({
             if(state.currentUser){
                 state.currentUser.avatar = action.payload
             }
+        },
+        profileUpdate : (state,action)=>{
+            if(state.currentUser){
+                state.currentUser = {...state.currentUser ,  ...action.payload}
+            }
         }
     }
 })
 
 
 
-export const { userLogin,userLogout,imageUploading } = userSlice.actions
+export const { userLogin,userLogout,imageUploading ,profileUpdate} = userSlice.actions
 
 export default userSlice.reducer
