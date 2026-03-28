@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { toast } from 'react-toastify'
-import { imageUploading } from '../Store/userSlice'
+import { imageUploading, profileUpdate } from '../Store/userSlice'
 
 const Profile = () => {
   const dispatch = useDispatch()
@@ -59,6 +59,22 @@ const Profile = () => {
         [e.target.name] : e.target.value
       }))
     }
+
+    const handleSubmit = async () => {
+      const res = await fetch("http://localhost:4000/api/user/update-profile",{
+        method:"PUT",
+        headers:{"Content-Type":"application/json"},
+        credentials : "include",
+        body:JSON.stringify(inputData)
+      });
+      const data = await res.json()
+      if(!data.success){
+        console.log(data)
+        return toast.error(data.message)
+      }
+      toast.success(data.message);
+      dispatch(profileUpdate(data.userData))
+    }
   return (
     <div className='flex flex-col justify-center items-center mt-10'>
         <div className='bg-white shadow-2xl roundeded p-10'>
@@ -73,7 +89,8 @@ const Profile = () => {
             <div className='text-gray-600'> <input onChange={handleChange} type="text" defaultValue={currentUser.username} name='username' className='bg-gray-100 px-2 py-1 rounded text-black'/></div>
             <div className='text-gray-600'> <input onChange={handleChange} type="email"  defaultValue={currentUser.email} name='email' className='bg-gray-100 px-2 py-1 rounded text-black'/></div>
             <div  className='text-gray-600'><input onChange={handleChange} type="password"  defaultValue={"**********"} name='password' className='bg-gray-100 px-2 py-1 rounded text-black'/></div>
-            <input className='bg-cyan-600 text-white py-1' type="submit" value="Update" />
+          
+            <button onClick={handleSubmit} className='bg-cyan-600 text-white py-1'>Update</button>
             </div>
         </div>
     </div>
