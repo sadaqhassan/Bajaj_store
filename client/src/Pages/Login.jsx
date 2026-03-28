@@ -32,7 +32,6 @@ const Login = () => {
         dispatch(userLogin(data))
         toast.success(data.message)
         navigate("/profile")
-        console.log("user : "+currentUser)
     }else{
         const res = await fetch('http://localhost:4000/api/user/register',{
             method:"POST",
