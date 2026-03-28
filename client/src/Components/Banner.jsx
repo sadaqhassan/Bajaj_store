@@ -1,6 +1,8 @@
 import React from 'react'
 import { ArrowBigRight } from 'lucide-react'
+import {  useNavigate } from 'react-router-dom'
 const Banner = () => {
+    const navigate = useNavigate()
 return (
     <div className='flex flex-col justify-center items-center mt-30 mb-10 mx-40'>
         <div className='flex flex-col md:flex-row justify-between md:gap-20 gap-6'>
@@ -12,7 +14,7 @@ return (
         Hadda booqo oo hel mooto <br/> taasi oo kuu fududaynaysa noloshaada!</p>
         </div>
     </div>
-    <button  className='flex gap-4 bg-cyan-600 px-2 py-1 rounded text-white'>
+    <button onClick={()=>navigate('/')} className='flex gap-4 bg-cyan-600 px-2 py-1 rounded text-white'>
         <ArrowBigRight/>
         Get started
     </button>
