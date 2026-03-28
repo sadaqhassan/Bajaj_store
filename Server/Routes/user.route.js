@@ -9,6 +9,6 @@ user.post("/login",loginApi);
 user.get("/user-data",isAuthM,getProfileApi);
 user.get("/logout",logout);
 user.post("/google",googleOauth);
-user.post("/uploadImage",uploadImageApi);
+user.post("/upload-image",isAuthM,uploadImageApi);
 
 export const userRoute = user;
