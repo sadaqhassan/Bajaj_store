@@ -2,9 +2,12 @@ import jwt from 'jsonwebtoken'
 
 export const isAuthM = async (req,res,next) => {
     try {
-        const userToken = req.cookies.accessToken;
+
+        const userToken = req.cookies?.accessToken;
+        
+        
         if(!userToken){
-            return res.status(404).json({success:false,message:"Please login first"})
+            return res.status(401).json({success:false,message:"Please login first"})
         }
 
         const verifyToken = jwt.verify(userToken,process.env.JWT_SECRET);
