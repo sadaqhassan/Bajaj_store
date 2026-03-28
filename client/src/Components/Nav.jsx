@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { userLogout } from '../Store/userSlice'
 
 const Nav = () => {
+
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const currentUser = useSelector((state)=>state.user.currentUser)
@@ -41,8 +42,8 @@ const Nav = () => {
           <div className='relative group'>
           <img src={currentUser.avatar? currentUser.avatar : "./user.png"} alt="" className='w-10 h-10 rounded-full'/>
           <ul className='hidden z-10 text-gray-900 px-4 rounded py-2 fixed  right-8  top-14 w-30 group-hover:block bg-white shadow-xl '>
-            <li onClick={LogoutFucntion} className='cursor-pointer pb-3'>Logout</li>
             <li onClick={()=>navigate('/profile')} className='cursor-pointer '>Profile</li>
+            <li onClick={LogoutFucntion} className='cursor-pointer pt-3'>Logout</li>
           </ul>
         </div> :
         <button onClick={()=>navigate('/auth')} className='bg-cyan-500 px-2 py-1 rounded'>Login</button>        
