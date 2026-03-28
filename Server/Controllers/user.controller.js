@@ -148,3 +148,24 @@ export const uploadImageApi = async (req,res) => {
         console.log(error)
     }
 }
+
+
+export const updatePofileApi = async (req,res) => {
+    const id = req.userId
+    const { username, email } = req.body;
+    if(!id) return res.status(401).json({success:false,message:"please register first"})
+    try {
+        const user = await theUser.findByIdAndUpdate(
+            id,
+            { $set: { username, email } },
+            { new: true }
+        );
+
+
+    return res.status(200).json({success:true,userData:user,message:"updated profile"});
+        
+    } catch (error) {
+        res.status(500).json({success:false,message:"server error"})
+        console.log(error)
+    }
+}
