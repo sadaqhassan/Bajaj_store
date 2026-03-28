@@ -5,6 +5,8 @@ import { imageUploading } from '../Store/userSlice'
 
 const Profile = () => {
   const dispatch = useDispatch()
+  const [progress,setProgrss] = useState(false)
+  const [inputData,setInputData] = useState({})
   const [uploadImge,setUploadImage] = useState("")
   const fileRef = useRef()
 
@@ -17,7 +19,7 @@ const Profile = () => {
     const data = new FormData();
     data.append("file",file)
     data.append("upload_preset","theBajaj_store")
-
+    setProgrss(true)
     const res = await fetch(
         "https://api.cloudinary.com/v1_1/ds0ianhj2/image/upload",
         {
@@ -37,12 +39,11 @@ const Profile = () => {
         body:JSON.stringify({imageUri:image_secure_uri})
       });
       const imageData = await resImage.json()
-
+      setProgrss(false)
       if(!imageData.success){
         console.log(imageData)
         toast.error(imageData.message)
       }
-      
       toast.success(imageData.message);
       dispatch(imageUploading(imageData.image))
       console.log(currentUser)
@@ -52,13 +53,21 @@ const Profile = () => {
   
 
   const {currentUser} = useSelector((state)=>state.user)
-    const handleChange = ()=>{
+    const handleChange = (e)=>{
+      setInputData((prev)=>({
+        ...prev,
+        [e.target.name] : e.target.value
+      }))
     }
   return (
     <div className='flex flex-col justify-center items-center mt-10'>
         <div className='bg-white shadow-2xl roundeded p-10'>
             <h1 className='text-center text-2xl font-medium mb-4'>Profile</h1>
-            <img onClick={()=>fileRef.current.click()} src={uploadImge? uploadImge : currentUser.avatar? currentUser.avatar : "./user.png"} alt="" className='w-18 h-18 rounded-full mb-5 ml-15'/>
+            <div >
+            {progress && <div className=' bg-black/70 fixed w-18 h-18  rounded-full mb-5 ml-15 justify-center items-center'><h1 className='text-center text-white pt-5 font-bold px-1 text-xs'>loading...</h1></div>}
+              <img onClick={()=>fileRef.current.click()} src={uploadImge? uploadImge : currentUser.avatar? currentUser.avatar : "./user.png"} alt="" className={`w-18 h-18 rounded-full mb-5 ml-15`}/>
+            
+            </div>
             <input onChange={handleFileChange} hidden type="file" name="file" ref={fileRef} id="" />
             <div className='flex flex-col  space-y-4'>
             <div className='text-gray-600'> <input onChange={handleChange} type="text" defaultValue={currentUser.username} name='username' className='bg-gray-100 px-2 py-1 rounded text-black'/></div>
