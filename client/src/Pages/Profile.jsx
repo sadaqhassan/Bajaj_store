@@ -1,5 +1,7 @@
 import React, { useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { toast } from 'react-toastify'
+import { imageUploading } from '../Store/userSlice'
 
 const Profile = () => {
   const dispatch = useDispatch()
@@ -25,20 +27,25 @@ const Profile = () => {
       );
 
       const result = await res.json();
-
-      console.log(result)
       setUploadImage(result.secure_url);
+      const image_secure_uri = result.secure_url
 
-      const resImge = await fetch("http://locaalhost:4000/api/user/uploadImage",{
+      const resImage = await fetch("http://localhost:4000/api/user/upload-image",{
         method:"POST",
         headers:{"Content-Type":"application/json"},
-        body:JSON.stringify(imageUri)
+        credentials : "include",
+        body:JSON.stringify({imageUri:image_secure_uri})
       });
-      const imageData = await resImge.json()
+      const imageData = await resImage.json()
 
-      if(imageData.success){
+      if(!imageData.success){
         console.log(imageData)
+        toast.error(imageData.message)
       }
+      
+      toast.success(imageData.message);
+      dispatch(imageUploading(imageData.image))
+      console.log(currentUser)
 
   }
 
