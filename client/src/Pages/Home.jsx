@@ -1,10 +1,12 @@
 import React from 'react'
 import Banner from '../Components/Banner'
+import CenterBanner from '../Components/CenterBanner'
 
 const Home = () => {
   return (
-    <div>
+    <div className=''>
         <Banner/>
+        <CenterBanner/>
     </div>
   )
 }

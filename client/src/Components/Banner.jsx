@@ -4,7 +4,7 @@ import {  useNavigate } from 'react-router-dom'
 const Banner = () => {
     const navigate = useNavigate()
 return (
-    <div className='flex flex-col justify-center items-center mt-30 mb-10 mx-40'>
+    <div className='Cone flex flex-col justify-center items-center mt-30 mb-10 mx-40'>
         <div className='flex flex-col md:flex-row justify-between md:gap-20 gap-6'>
         <img src="./tuktuk.png" className='md:w-56 md:h-56 w-86 h-46' alt="" />
         <div className='flex-wrap flex-col  '>
