@@ -133,7 +133,7 @@ export const googleOauth = async (req,res) => {
 export const uploadImageApi = async (req,res) => {
     const id = req.userId;
     try {
-        const user = await theUser.findById({id})
+        const user = await theUser.findById(id)
         if(!user){
             return res.status(400).json({success:false,message:"please register first"})
         }
@@ -142,7 +142,7 @@ export const uploadImageApi = async (req,res) => {
 
         await user.save()
 
-        res.status(200).json({success:true,userData:rest,message:`image changed`})
+        res.status(200).json({success:true ,image:user.avatar ,message:`image changed`})
     } catch (error) {
         res.status(500).json({success:false,message:"server error"})
         console.log(error)
