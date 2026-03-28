@@ -11,14 +11,19 @@ export const userSlice = createSlice({
         userLogin:(state,action)=>{
             state.currentUser = action.payload.userData
         },
-        userLogout:(state,action)=>{
+        userLogout:(state)=>{
             state.currentUser = null
+        },
+        imageUploading:(state,action)=>{
+            if(state.currentUser){
+                state.currentUser.avatar = action.payload
+            }
         }
     }
 })
 
 
 
-export const { userLogin,userLogout } = userSlice.actions
+export const { userLogin,userLogout,imageUploading } = userSlice.actions
 
 export default userSlice.reducer
