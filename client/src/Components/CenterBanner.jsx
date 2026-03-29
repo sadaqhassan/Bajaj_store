@@ -16,8 +16,10 @@ function CenterBanner() {
                 clearInterval(interval)
             }
             setCostommers(start);
-        },1000);
+        },100);
     },[])
+
+  
 return (
     <div className='cone flex justify-center text-xl  py-6 items-center my-16 bg-gray-100 shadow-2xl rounded px-10 '>
         <p className='text-xl font-bold mr-10'>
