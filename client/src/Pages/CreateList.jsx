@@ -75,13 +75,13 @@ const CreateList = () => {
                         </form>
                     </div>
 
-                    <div className="rounded-3xl p-10 relative min-h-[662px] w-full max-w-[520px] hidden md:flex flex-col  overflow-hidden">
+                    <div className="rounded-3xl p-10 relative min-h-[662px] w-full max-w-[520px] md:flex flex-col  overflow-hidden">
                         <p className='py-5 '>Bajaj images <span className='text-xs ml-3 text-gray-500'>( choose atleast 3 images)</span></p>
                     <label htmlFor="fileInput" className="border bg-white rounded-md text-sm w-80 border-indigo-600/60 p-8 flex flex-col items-center gap-4  cursor-pointer hover:border-indigo-500 transition">
                 <path d="M25.665 3.667H11a3.667 3.667 0 0 0-3.667 3.666v29.334A3.667 3.667 0 0 0 11 40.333h22a3.667 3.667 0 0 0 3.666-3.666v-22m-11-11 11 11m-11-11v11h11m-7.333 9.166H14.665m14.667 7.334H14.665M18.332 16.5h-3.667" stroke="#2563EB" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                         <p className="text-gray-500">Drag & drop your images here</p>
                         <p className="text-gray-400">Or <span className="text-indigo-500 underline">click</span> to upload</p>
-                        <input id="fileInput" type="file" className="hidden" />
+                        <input id="fileInput" type="file" hidden />
                     </label>
                 </div>
                 </div>
