@@ -6,6 +6,7 @@ import Login from './Pages/Login'
 import { ToastContainer} from 'react-toastify';
 import Profile from './Pages/Profile'
 import ProtectPage from './Pages/ProtectPage'
+import CreateList from './Pages/createList'
 
 
 const App = () => {
@@ -18,6 +19,7 @@ const App = () => {
         <Route path='/auth' element={<Login/>}/>
         <Route path='/profile' element={<ProtectPage/>}>
         <Route index element={<Profile/>}/>
+        <Route path='create-list' element={<CreateList/>}/>
         </Route>
       </Routes>
     </div>
