@@ -105,22 +105,23 @@ export const googleOauth = async (req,res) => {
 
     const hash = await bcrypt.hash(password,10)
 
-    const newUser = new theUser({
+    if(!user){
+        const newUser = new theUser({
             username,
             email,
             password:hash,
             avatar
         });
-
-    if(!user){
         await newUser.save();
+        const token = jwt.sign({id:user._id},process.env.JWT_SECRET, {expiresIn:"7d"})
+        return res.cookie("accessToken",token,{httpOnly:true}).status(200).json({success:true,userData:rest,message:`Welcome `})
     }
 
-        const token = jwt.sign({id:newUser._id},process.env.JWT_SECRET, {expiresIn:"7d"})
+        const token = jwt.sign({id:user._id},process.env.JWT_SECRET, {expiresIn:"7d"})
         
         const {password:pass, ...rest} = user._doc
 
-        return res.cookie("accessToken",token,{httpOnly:true}).status(200).json({success:true,userData:rest,message:`Welcome `})
+        return res.cookie("accessToken",token,{httpOnly:true}).status(200).json({success:true,userData:rest,message:`Welcome back`})
 
         
     } catch (error) {
@@ -135,7 +136,7 @@ export const uploadImageApi = async (req,res) => {
     try {
         const user = await theUser.findById(id)
         if(!user){
-            return res.status(400).json({success:false,message:"please register first"})
+            return res.status(400).json({success:false,message:"please register "})
         }
 
         user.avatar = req.body.imageUri
