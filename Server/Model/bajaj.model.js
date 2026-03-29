@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose, { Schema, SchemaTypes } from "mongoose";
 
 const bajajSchema = mongoose.Schema({
     model:{
@@ -12,7 +12,23 @@ const bajajSchema = mongoose.Schema({
     price:{
         type:Number,
         required:true
+    },
+    images:{
+        type:Array,
+        required:true
+    },
+    assignedTo:{
+        type:Schema.Types.ObjectId,
+        required:true
+    },
+    discription:{
+        type:String,
+        required:true
+    },
+    discount:{
+        type:Number,
     }
-},{timeStamps:true})
+    
+},{timeStamps:true});
 
 export const Bajaj = mongoose.model("bajaj",bajajSchema);
