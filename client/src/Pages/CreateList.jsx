@@ -1,6 +1,7 @@
 import React from 'react'
 import { useState } from 'react'
 import { useSelector } from 'react-redux'
+import { toast } from 'react-toastify'
 
 const CreateList = () => {
     const {currentUser} = useSelector((state)=>state.user)
@@ -17,6 +18,22 @@ const CreateList = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         console.log(inputData)
+
+        const res = await fetch("http://localhost:4000/api/bajajs/create-bajaj",{
+            method:"POST",
+            headers:{"Content-Type":"application/json"},
+            credentials:"include",
+            body:JSON.stringify(inputData)
+        });
+
+        const data = await res.json();
+
+        if(!data.success){
+            return toast.error(data.message);
+        }
+
+        toast.success(data.message);
+
     }
   return (
     <div className='flex flex-col justify-center items-center mt-16'>
@@ -58,7 +75,7 @@ const CreateList = () => {
 
                             <div className="mb-5">
                                 <label className="block text-sm text-gray-500 mb-2">Email contect</label>
-                                <input name='email' onChange={handleChange} defaultValue={currentUser?.email} type="email" placeholder="samo@company.com" className="w-full px-3 py-3 border border-gray-300 rounded-lg text-sm outline-none focus:border-indigo-500 transition-colors"/>
+                                <input name='contact' onChange={handleChange} defaultValue={currentUser?.email} type="email" placeholder="samo@company.com" className="w-full px-3 py-3 border border-gray-300 rounded-lg text-sm outline-none focus:border-indigo-500 transition-colors"/>
                             </div>
 
                             <div className="mb-5 grid grid-cols-2 gap-4">
