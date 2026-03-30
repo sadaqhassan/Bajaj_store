@@ -2,7 +2,7 @@ import mongoose, { Schema, SchemaTypes } from "mongoose";
 
 const bajajSchema = mongoose.Schema({
     model:{
-        type:Date,
+        type:String,
         required:true
     },
     type:{
@@ -15,7 +15,6 @@ const bajajSchema = mongoose.Schema({
     },
     images:{
         type:Array,
-        required:true
     },
     assignedTo:{
         type:Schema.Types.ObjectId,
