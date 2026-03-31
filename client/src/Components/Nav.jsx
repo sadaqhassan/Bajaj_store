@@ -35,7 +35,7 @@ const Nav = () => {
         <div className='flex items-center gap-4'>
           <Link to={'/'}> Home </Link>
           <Link to={'/'}> Bajajs </Link>
-          <Link to={'/'}> My Lists </Link>
+          <Link to={'/profile/my-list'}> My Lists </Link>
         </div>
         {
           currentUser  || currentUser !== null ?
