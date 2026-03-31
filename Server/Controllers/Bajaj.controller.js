@@ -23,8 +23,8 @@ export const myListing = async (req,res) => {
     const id = req.userId
 
     try {
-        const userListing = await Bajaj.findOne({assingnedTo:id});
-
+        const userListing = await Bajaj.findOne({assignedTo:id});
+        
         return res.status(200).json({success:true,data:userListing});
 
     } catch (error) {
