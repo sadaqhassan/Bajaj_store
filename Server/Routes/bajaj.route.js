@@ -5,6 +5,6 @@ import { isAuthM } from "../MiddleWares/isAuth.js";
 const bajaj = Router();
 
 bajaj.post("/create-bajaj",isAuthM,bajajPostApi);
-bajaj.post("/my-list",isAuthM, myListing);
+bajaj.get("/my-list",isAuthM, myListing);
 
 export const bajajRoute = bajaj
