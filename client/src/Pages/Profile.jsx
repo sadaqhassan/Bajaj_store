@@ -92,7 +92,10 @@ const Profile = () => {
             <div  className='text-gray-600'><input onChange={handleChange} type="password"  defaultValue={"**********"} name='password' className='bg-gray-100 px-2 py-1 rounded text-black'/></div>
           
             <button onClick={handleSubmit} className='bg-cyan-600 rounded-xl text-white py-1'>Update</button>
-            <button onClick={()=>navigate('/profile/create-list')} className='border  text-black rounded-xl py-1'>create List</button>
+            <div className='flex justify-between px-3 space-x-4 '>
+            <button onClick={()=>navigate('/profile/create-list')} className='border-b px-4 text-black rounded-xl py-1'>create List</button>
+            <button onClick={()=>navigate('/profile/my-list')} className='border-t px-4 text-black rounded-xl py-1'>view List</button>
+            </div>
             </div>
         </div>
     </div>
