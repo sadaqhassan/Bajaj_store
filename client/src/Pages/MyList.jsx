@@ -47,7 +47,7 @@ return !loading ?(
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-4.5">
                     {bajaj.map((bajaj,key) => (
                         <div key={bajaj.id} className="flex items-center p-2 border border-black/10 hover:border-black/20 transition-colors rounded-xl w-sm sm:w-[420px]">
-                            <img src={bajaj?.img?.img} alt="House" className="w-full max-w-[118px] rounded-lg object-cover" />
+                            <img src={bajaj?.images[0]} alt="House" className="w-full max-w-[118px] rounded-lg object-cover" />
                             <div className="ml-4">
                                 <p className="text-sm text-zinc-900">Model: <span className='text-md font-bold'>{bajaj.model}</span></p>
                                 <p className="text-sm text-zinc-900">Price: <span className='text-md font-bold '>{bajaj.price}</span></p>
