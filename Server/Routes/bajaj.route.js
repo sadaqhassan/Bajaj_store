@@ -6,5 +6,6 @@ const bajaj = Router();
 
 bajaj.post("/create-bajaj",isAuthM,bajajPostApi);
 bajaj.get("/my-list",isAuthM, myListing);
+bajaj.delete("/my-list",isAuthM, deleteList);
 
 export const bajajRoute = bajaj
