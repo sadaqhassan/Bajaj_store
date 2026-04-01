@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { toast } from 'react-toastify'
@@ -8,7 +8,7 @@ const CreateList = () => {
     const [inputData,setInputData] = useState({})
     const [files,setFiles] = useState([])
     const [preview,setPreview] = useState([])
-    const [UploadImage,setUploadImage] = useState([])
+    const [error,setError] = useState("")
 
     const handleFile = async (e) => {
         const images = Array.from(e.target.files)
@@ -37,9 +37,9 @@ const CreateList = () => {
                 );
                 const result = await res.json();
             
-                  setInputData((prev)=>({...prev,images:result.secure_url}));
-                  const image_secure_uri = result.secure_url
-                  console.log(image_secure_uri)
+                setInputData((prev)=>({...prev,images:result.secure_url}));
+                const image_secure_uri = result.secure_url
+                console.log(image_secure_uri)
                 }
         } catch (error) {
             toast.error(error)
@@ -50,13 +50,17 @@ const CreateList = () => {
         const {name,value} = e.target
         setInputData((prev)=>({
             ...prev,
-            [name]:value
+            [name]:value,
         }));
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         console.log(inputData)
+
+        if(!inputData.model || !inputData.price || !inputData.type ){
+            return toast.error("please fill all ")
+        }
 
         const res = await fetch("http://localhost:4000/api/bajajs/create-bajaj",{
             method:"POST",
@@ -78,6 +82,10 @@ const CreateList = () => {
     if(files){
         console.log(files)
     }
+
+    useEffect(()=>{
+        setInputData((prev)=>({...prev,contact:currentUser?.email}))
+    },[inputData])
   return (
     <div className='flex flex-col justify-center items-center mt-16'>
    
@@ -118,7 +126,7 @@ const CreateList = () => {
 
                             <div className="mb-5">
                                 <label className="block text-sm text-gray-500 mb-2">Email contect</label>
-                                <input name='contact' onChange={handleChange} defaultValue={currentUser?.email} type="email" placeholder="samo@company.com" className="w-full px-3 py-3 border border-gray-300 rounded-lg text-sm outline-none focus:border-indigo-500 transition-colors"/>
+                                <input  onChange={(e)=>setInputData((prev)=>({...prev,contact:e.target.value ? e.target.value : currentUser?.email}))}  type="email" placeholder={currentUser?.email} className="w-full px-3 py-3 border border-gray-300 rounded-lg text-sm outline-none focus:border-indigo-500 transition-colors"/>
                             </div>
 
                             <div className="mb-5 grid grid-cols-2 gap-4">
@@ -167,8 +175,7 @@ const CreateList = () => {
                         ))
                     }
                     {
-                        preview.length > 0 && <button onClick={submitFiles} className='bg-cyan-600 px-2 py-1 rounded text-white'>submit</button>
-
+                        preview.length > 0 &&  !inputData?.images?.length <= 0 ?  <button onClick={()=>alert("submited")} className='border border-green-600 rounded-2xl '>✔️</button> : <button onClick={submitFiles} className='bg-cyan-600 px-2 py-1 rounded text-white'>submit</button>
                     }
                     </div>
                 </div>
