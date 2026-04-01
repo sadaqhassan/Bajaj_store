@@ -33,3 +33,33 @@ export const myListing = async (req,res) => {
     
     }
 }
+
+
+//delete
+export const deleteList = async (req,res) => {
+    const id = req.userId
+    const listId = req.params.id
+
+    try {
+        const ListId = await Bajaj.findById(listId)
+        if(ListId.assignedTo.toString() !== id){
+            return res.status(403).json({
+                success: false,
+                message: "You are not allowed to delete this"
+            });
+        }
+
+        await Bajaj.findOneAndDelete(ListId);
+
+        return res.status(200).json({
+            success: true,
+            message: "Listing deleted successfully"
+        });
+
+
+    } catch (error) {
+        res.status(500).json({success:false,message:"server error"})
+        console.log(error)
+    
+    }
+}
