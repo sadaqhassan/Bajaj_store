@@ -6,7 +6,46 @@ import { toast } from 'react-toastify'
 const CreateList = () => {
     const {currentUser} = useSelector((state)=>state.user)
     const [inputData,setInputData] = useState({})
+    const [files,setFiles] = useState([])
+    const [preview,setPreview] = useState([])
+    const [UploadImage,setUploadImage] = useState([])
 
+    const handleFile = async (e) => {
+        const images = Array.from(e.target.files)
+        if (images.length < 3) {
+        alert("Please select at least 3 images");
+            return;
+        }
+        const imgUri = images.map((img)=>URL.createObjectURL(img));
+        setPreview(imgUri)
+        setFiles(images)
+    }
+
+    //preset
+    const submitFiles = async (e) => {
+        try {
+            for(let i = 0 ; i < files.length; i++ ){
+                const data = new FormData();
+                data.append("file",files[i])
+                data.append("upload_preset","theBajaj_store")
+                const res = await fetch(
+                    "https://api.cloudinary.com/v1_1/ds0ianhj2/image/upload",
+                    {
+                      method: "POST",
+                      body: data,
+                    }
+                );
+                const result = await res.json();
+            
+                  setInputData((prev)=>({...prev,images:result.secure_url}));
+                  const image_secure_uri = result.secure_url
+                  console.log(image_secure_uri)
+                }
+        } catch (error) {
+            toast.error(error)
+            console.log(error)
+        }
+    }
     const handleChange = async (e) => {
         const {name,value} = e.target
         setInputData((prev)=>({
@@ -34,6 +73,10 @@ const CreateList = () => {
 
         toast.success(data.message);
 
+    }
+
+    if(files){
+        console.log(files)
     }
   return (
     <div className='flex flex-col justify-center items-center mt-16'>
@@ -113,8 +156,22 @@ const CreateList = () => {
                 <path d="M25.665 3.667H11a3.667 3.667 0 0 0-3.667 3.666v29.334A3.667 3.667 0 0 0 11 40.333h22a3.667 3.667 0 0 0 3.666-3.666v-22m-11-11 11 11m-11-11v11h11m-7.333 9.166H14.665m14.667 7.334H14.665M18.332 16.5h-3.667" stroke="#2563EB" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                         <p className="text-gray-500">Drag & drop your images here</p>
                         <p className="text-gray-400">Or <span className="text-indigo-500 underline">click</span> to upload</p>
-                        <input id="fileInput" type="file" hidden />
+                        <input accept='image/*' multiple id="fileInput" onChange={handleFile} type="file" hidden />
                     </label>
+                    <div className='w-full max-w-[520px] mt-5'>
+                    {files.length > 0 && <h1 className='text-gray-600 text-sm'>({files.length}) images</h1>}
+                    <div className='grid grid-cols-2 gap-4 md:grid-cols-3'>
+                    {
+                        preview.length > 0 && preview.map((img)=>(
+                            <img className='w-20 h-20 rounded ' src={img} alt="" />
+                        ))
+                    }
+                    {
+                        preview.length > 0 && <button onClick={submitFiles} className='bg-cyan-600 px-2 py-1 rounded text-white'>submit</button>
+
+                    }
+                    </div>
+                </div>
                 </div>
                 </div>
             </section>
