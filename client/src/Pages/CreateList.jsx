@@ -31,8 +31,8 @@ const CreateList = () => {
                 const res = await fetch(
                     "https://api.cloudinary.com/v1_1/ds0ianhj2/image/upload",
                     {
-                      method: "POST",
-                      body: data,
+                    method: "POST",
+                    body: data,
                     }
                 );
                 const result = await res.json();
@@ -59,7 +59,7 @@ const CreateList = () => {
         console.log(inputData)
 
         if(!inputData.model || !inputData.price || !inputData.type ){
-            return toast.error("please fill all ")
+            return toast.error("please fill all")
         }
 
         const res = await fetch("http://localhost:4000/api/bajajs/create-bajaj",{
@@ -79,16 +79,14 @@ const CreateList = () => {
 
     }
 
-    if(files){
-        console.log(files)
-    }
 
     useEffect(()=>{
-        setInputData((prev)=>({...prev,contact:currentUser?.email}))
-    },[inputData])
+        if(!inputData?.email){
+            setInputData((prev)=>({...prev,contact:currentUser?.email}))
+        }
+    },[])
   return (
     <div className='flex flex-col justify-center items-center mt-16'>
-   
             <style>
                 {`
                     @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
