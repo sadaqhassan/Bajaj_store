@@ -16,7 +16,7 @@ const Bajajs = () => {
             return toast.error(data.message);
         }
         toast.success(data.message);
-        setBajajs(data)
+        setBajajs(data.data);
 
         } catch (error) {
             toast.error(error)
@@ -28,8 +28,11 @@ const Bajajs = () => {
     })
   return (
     <div>
-        
-        <BajajCard/>
+        {
+            bajajs.map((baj)=>(
+                <BajajCard key={baj._id} baj={baj}/>
+            ))
+        }
     </div>
   )
 }
