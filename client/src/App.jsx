@@ -6,7 +6,7 @@ import Login from './Pages/Login'
 import { ToastContainer} from 'react-toastify';
 import Profile from './Pages/Profile'
 import ProtectPage from './Pages/ProtectPage'
-import CreateList from './Pages/createList'
+import CreateList from './Pages/CreateList'
 import MyList from './Pages/MyList'
 import Bajajs from './Pages/Bajajs'
 
