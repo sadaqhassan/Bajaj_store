@@ -1,8 +1,12 @@
 import React, { useEffect } from 'react'
+import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 
 const BajajCard = (baj) => {
 
+    const {currentUser} = useSelector((state)=>state.user)
+    console.log(currentUser)
+    console.log(baj)
     const handleDelete = async (id) => {
             console.log(baj)
             const res = await fetch(`http://localhost:4000/api/bajajs/my-list/delete/${id}`,{
@@ -32,8 +36,12 @@ const BajajCard = (baj) => {
                                     {baj.model?.model}
                                 </div>
                             <div className="text-sm mt-4  flex items-center gap-1.5">
+                            { 
+                            currentUser.email === baj?.baj?.contact && <>
                                 <button className='text-sm text-green-600 px-2' >update</button>    
-                                <button className='text-sm text-red-600 px-2' onClick={()=>handleDelete(baj.baj._id)}>delete</button>    
+                                <button className='text-sm text-red-600 px-2' onClick={()=>handleDelete(baj.baj._id)}>delete</button> 
+                            </>   
+                            }
                             </div>
                             </div>
                         </div>
