@@ -8,6 +8,7 @@ import Profile from './Pages/Profile'
 import ProtectPage from './Pages/ProtectPage'
 import CreateList from './Pages/createList'
 import MyList from './Pages/MyList'
+import Bajajs from './Pages/Bajajs'
 
 
 const App = () => {
@@ -22,6 +23,7 @@ const App = () => {
         <Route index element={<Profile/>}/>
         <Route path='create-list' element={<CreateList/>}/>
         <Route path='my-list' element={<MyList/>}/>
+        <Route path='all-list' element={<Bajajs/>}/>
         </Route>
       </Routes>
     </div>
