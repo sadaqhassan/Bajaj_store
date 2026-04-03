@@ -23,7 +23,7 @@ const App = () => {
         <Route index element={<Profile/>}/>
         <Route path='create-list' element={<CreateList/>}/>
         <Route path='my-list' element={<MyList/>}/>
-        <Route path='all-list' element={<Bajajs/>}/>
+        <Route path='all-lists' element={<Bajajs/>}/>
         </Route>
       </Routes>
     </div>
