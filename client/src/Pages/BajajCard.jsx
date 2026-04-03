@@ -6,7 +6,6 @@ const BajajCard = (baj) => {
 
     const {currentUser} = useSelector((state)=>state.user)
     console.log(currentUser)
-    console.log(baj)
     const handleDelete = async (id) => {
             const res = await fetch(`https://bajaj-store.onrender.com/api/bajajs/my-list/delete/${id}`,{
                 method:"DELETE",
