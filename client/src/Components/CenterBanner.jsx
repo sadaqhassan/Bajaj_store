@@ -27,7 +27,7 @@ return (
         </p>
         <ArrowBigRight/>
         <div>
-            <p className='custom font-bold font-bol ml-10'>+{costomers}</p>
+            <p className='font-bold  ml-10'>+{costomers}</p>
         </div>
     </div>
   )
