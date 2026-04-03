@@ -8,7 +8,6 @@ const BajajCard = (baj) => {
     console.log(currentUser)
     console.log(baj)
     const handleDelete = async (id) => {
-            console.log(baj)
             const res = await fetch(`https://bajaj-store.onrender.com/api/bajajs/my-list/delete/${id}`,{
                 method:"DELETE",
                 credentials:"include"
