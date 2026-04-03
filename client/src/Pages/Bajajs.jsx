@@ -25,9 +25,9 @@ const Bajajs = () => {
 
     useEffect(()=>{
         handleFetch()
-    })
+    },[])
   return (
-    <div>
+    <div className='grid grid-cols-2 md:grid-cols-4 mt-16 ml-10'>
         {
             bajajs.map((baj)=>(
                 <BajajCard key={baj._id} baj={baj}/>
