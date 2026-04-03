@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "server": "nodemon Server/server.js",
+    "start": "node Server/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -27,7 +27,6 @@
     "express": "^5.2.1",
     "jsonwebtoken": "^9.0.3",
     "mongoose": "^9.3.1",
-    "nodemon": "^3.1.14",
-    "react-hot-toast": "^2.6.0"
+    "nodemon": "^3.1.14"
   }
 }
