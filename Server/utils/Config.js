@@ -10,7 +10,7 @@ export const configApp = (app)=>{
     app.listen(PORT,()=>console.log("server is running on http://localhost:"+PORT))
     app.use(express.json());
     app.use(cors({
-        origin:"http://localhost:5173",
+        origin:"https://bajaj-store.onrender.com",
         credentials:true
     }))
 }  
