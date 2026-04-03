@@ -17,7 +17,7 @@ const loginWithGoogle = async()=>{
         const provider =  new GoogleAuthProvider()
         const result = await signInWithPopup(auth,provider)
 
-        const res = await fetch('http://localhost:4000/api/user/google',{
+        const res = await fetch('https://bajaj-store.onrender.com/api/user/google',{
             method:"POST",
             headers:{"Content-Type":"application/json"},
             credentials:"include",
