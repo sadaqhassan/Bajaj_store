@@ -8,7 +8,6 @@ const CreateList = () => {
     const [inputData,setInputData] = useState({})
     const [files,setFiles] = useState([])
     const [preview,setPreview] = useState([])
-    const [error,setError] = useState("")
 
     const handleFile = async (e) => {
         const images = Array.from(e.target.files)
@@ -62,7 +61,7 @@ const CreateList = () => {
             return toast.error("please fill all")
         }
 
-        const res = await fetch("http://localhost:4000/api/bajajs/create-bajaj",{
+        const res = await fetch("https://bajaj-store.onrender.com/api/bajajs/create-bajaj",{
             method:"POST",
             headers:{"Content-Type":"application/json"},
             credentials:"include",

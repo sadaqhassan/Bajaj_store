@@ -18,7 +18,7 @@ const Login = () => {
         
         //sendRequest
         if(state === "login"){
-            const res = await fetch('http://localhost:4000/api/user/login',{
+            const res = await fetch('https://bajaj-store.onrender.com/api/user/login',{
             method:"POST",
             headers:{"Content-Type": "application/json"},
             credentials:"include",
@@ -33,7 +33,7 @@ const Login = () => {
         toast.success(data.message)
         navigate("/profile")
     }else{
-        const res = await fetch('http://localhost:4000/api/user/register',{
+        const res = await fetch('https://bajaj-store.onrender.com/api/user/register',{
             method:"POST",
             headers:{"Content-Type": "application/json"},
             body:JSON.stringify(inputData)

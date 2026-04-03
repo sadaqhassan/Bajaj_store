@@ -12,7 +12,7 @@ const MyList = () => {
 
 const getList = async () => {
     setloading(true)
-    const res = await fetch("http://localhost:4000/api/bajajs/my-list",{
+    const res = await fetch("https://bajaj-store.onrender.com/api/bajajs/my-list",{
                 method:"GET",
                 credentials:"include",
             });

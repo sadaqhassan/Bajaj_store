@@ -34,7 +34,7 @@ const Profile = () => {
       setUploadImage(result.secure_url);
       const image_secure_uri = result.secure_url
 
-      const resImage = await fetch("http://localhost:4000/api/user/upload-image",{
+      const resImage = await fetch("https://bajaj-store.onrender.com/api/user/upload-image",{
         method:"POST",
         headers:{"Content-Type":"application/json"},
         credentials : "include",

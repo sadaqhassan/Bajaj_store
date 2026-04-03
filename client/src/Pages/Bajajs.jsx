@@ -6,7 +6,7 @@ const Bajajs = () => {
     const [bajajs,setBajajs] = useState([])
     const handleFetch = async () => {
         try {
-        const res = await fetch("http://localhost:4000/api/bajajs/my-list/get",{
+        const res = await fetch("https://bajaj-store.onrender.com/api/bajajs/my-list/get",{
             method:"GET",
             credentials:"include",
         });
