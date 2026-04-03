@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import BajajCard from './BajajCard';
 
 const MyList = () => {
     const [bajaj,setBajaj] = useState([]);
@@ -24,24 +25,6 @@ const getList = async () => {
             toast.success(data.message);
     }
 
-
-
-
-    const handleDelete = async (id) => {
-        console.log(bajaj)
-        const res = await fetch(`http://localhost:4000/api/bajajs/my-list/delete/${id}`,{
-            method:"DELETE",
-            credentials:"include"
-        });
-        const data = await res.json();
-        if(!data.success){
-            return toast.error(data.message)
-        }
-
-        toast.success(data.message);
-        getList()
-    }
-
     useEffect(()=>{
         getList()
     },[])
@@ -59,26 +42,8 @@ return !loading ?(
                 {
                     bajaj.length > 0 ?
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-4.5">
-                    {bajaj.map((bajaj,key) => (
-                        <div key={bajaj.id} className="flex items-center p-2 border border-black/10 hover:border-black/20 transition-colors rounded-xl w-sm sm:w-[420px]">
-                            <img src={bajaj?.images[0]} alt="House" className="w-full max-w-[118px] rounded-lg object-cover" />
-                            <div className="ml-4">
-                                <p className="text-sm text-zinc-900">Model: <span className='text-md font-bold'>{bajaj.model}</span></p>
-                                <p className="text-sm text-zinc-900">Price: <span className='text-md font-bold '>{bajaj.price}</span></p>
-                                <p className="text-sm text-zinc-900 mt-3">type: <span className='text-md font-bold'>{bajaj.type}</span></p>
-                                <p className="text-sm text-zinc-900 mt-3">Owner: <span className='text-md font-bold'>{bajaj.contact}</span></p>
-                                <div className="text-sm mt-4 text-zinc-600 flex items-center gap-1.5">
-                                    {bajaj.type}
-                                    <div className='size-1 rounded-full bg-[#777777]'></div>
-                                    {bajaj.model}
-                                </div>
-                            <div className="text-sm mt-4  flex items-center gap-1.5">
-                                <button className='text-sm text-green-600 px-2' >update</button>    
-                                <button className='text-sm text-red-600 px-2' onClick={()=>handleDelete(bajaj._id)}>delete</button>    
-                            </div>
-                            </div>
-                        </div>
-                        
+                    {bajaj.map((baj) => (
+                        <BajajCard baj={baj} getList={getList}/>
                     ))}
                     </div>
                     :

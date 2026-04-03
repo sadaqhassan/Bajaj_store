@@ -63,3 +63,21 @@ export const deleteList = async (req,res) => {
     
     }
 }
+
+
+//list all bajajs
+
+export const listAll = async (req,res) => {
+
+    const {userId} = req;
+
+    if(!userId) return res.status(404).json({success:false});
+    
+    try {
+        const lists = await Bajaj.find();
+        return res.status(200).json({success:true,data:lists});
+    } catch (error) {
+        res.status(500).json({success:false,message:"server error"})
+        console.log(error)
+    }
+}
