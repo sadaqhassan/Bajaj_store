@@ -27,7 +27,7 @@ const Bajajs = () => {
         handleFetch()
     },[])
   return (
-    <div className='grid grid-cols-2 md:grid-cols-4 mt-16 ml-10'>
+    <div className='grid grid-cols-1 overflow-x-hidden md:grid-cols-4 mt-16 ml-10'>
         {
             bajajs.map((baj)=>(
                 <BajajCard key={baj._id} baj={baj}/>
