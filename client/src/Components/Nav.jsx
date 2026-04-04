@@ -13,7 +13,7 @@ const Nav = () => {
   const [menuOpen , setMenuOpen] = useState(false)
   
   const LogoutFucntion = async () => {
-    const res = await fetch("http://localhost:4000/api/user/logout",{
+    const res = await fetch("https://bajaj-store.onrender.com/api/user/logout",{
       method:"GET",
       credentials:"include"
     });
@@ -68,8 +68,8 @@ const Nav = () => {
           menuOpen &&
           <div className='flex flex-col md:hidden items-start bg-gray-700 py-4 text-white pl-5 gap-4'>
           <Link to={'/'}> Home </Link>
-          <Link to={'/'}> Bajajs </Link>
-          <Link to={'/'}> My Lists </Link>
+          <Link to={'/profile/all-lists'}> Bajajs </Link>
+          <Link to={'/profile/my-list'}> My Lists </Link>
           {
             currentUser  &&
             <button onClick={LogoutFucntion} className='cursor-pointer pb-3'>Logout</button>
