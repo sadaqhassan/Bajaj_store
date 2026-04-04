@@ -57,7 +57,8 @@ export const loginApi = async(req,res)=>{
 
         return res.cookie("accessToken",token,{  httpOnly: true,
   secure: true,
-  sameSite: "None"
+  sameSite: "None",
+   maxAge: 7 * 24 * 60 * 60 * 1000
 }).status(200).json({success:true,userData:rest ,message:`Welcome back `})
     } catch (error) {
         res.status(500).json({success:false,message:"server error"})
@@ -120,7 +121,8 @@ export const googleOauth = async (req,res) => {
         const token = jwt.sign({id:user._id},process.env.JWT_SECRET, {expiresIn:"7d"})
         return res.cookie("accessToken",token,{  httpOnly: true,
   secure: true,
-  sameSite: "None"
+  sameSite: "None",
+   maxAge: 7 * 24 * 60 * 60 * 1000
 }).status(200).json({success:true,userData:rest,message:`Welcome `})
     }
 
@@ -131,7 +133,8 @@ export const googleOauth = async (req,res) => {
         return res.cookie("accessToken",token ,{
 httpOnly: true,
   secure: true,
-  sameSite: "None"
+  sameSite: "None",
+   maxAge: 7 * 24 * 60 * 60 * 1000
 
         }).status(200).json({success:true,userData:rest,message:`Welcome back`})
 
